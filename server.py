@@ -45,3 +45,8 @@ def step(action: Action):
 @app.post("/predict")
 def predict(action: Action):
     return env.step(action.action)
+
+@app.post("/reset")
+def reset():
+    return env.reset()
+print("Server restarted")
