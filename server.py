@@ -1,30 +1,15 @@
-from fastapi import FastAPI
-from openenv.env import CustomerSupportEnv
-from openenv.models import Action
+class CustomerSupportEnv:
+    def __init__(self):
+        self.step_count = 0
 
-app = FastAPI()
-env = CustomerSupportEnv()
+    def reset(self):
+        self.step_count = 0
+        return {"state": "start"}
 
-@app.get("/")
-def root():
-    return {"status": "running"}
+    def step(self, action):
+        self.step_count += 1
+        return {
+            "reward": 0.5,
+            "done": self.step_count >= 3
+        }
 
-@app.post("/reset")
-def reset():
-    return env.reset().dict()
-
-@app.post("/step")
-def step(action: dict):
-    action_obj = Action(**action)
-    obs, reward, done, info = env.step(action_obj)
-
-    return {
-        "observation": obs.dict(),
-        "reward": reward.dict(),
-        "done": done,
-        "info": info
-    }
-
-@app.get("/state")
-def state():
-    return env.state()
