@@ -1,3 +1,5 @@
+print("NEW SERVER VERSION RUNNING")
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -49,4 +51,4 @@ def predict(action: Action):
 @app.post("/reset")
 def reset():
     return env.reset()
-print("Server restarted")
+
