@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-print("✅ NEW VERSION DEPLOYED")
+print("🔥 APP.PY IS RUNNING 🔥")
 
 app = FastAPI()
 
